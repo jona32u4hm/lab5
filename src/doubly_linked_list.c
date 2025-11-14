@@ -61,7 +61,7 @@ void doublyInsertTail(DoublyList *doublyList, void *data){
 
 void doublyInsert(DoublyList *doublyList, void *data, int index){
 	DoublyNode *indexNode = doublyList->head;
-	if (index > doublyList->size) return; // el index debe estar dentro de la lista
+	if (index > doublyList->size) return; // index must be in list range
 	
 	if (doublyList->head == NULL) {
         // Si está vacía el nuevo nodo es la cabeza y la cola a la vez.
@@ -82,6 +82,28 @@ void doublyInsert(DoublyList *doublyList, void *data, int index){
 	
 	}
 	doublyList->size++;
+}
+
+void doublyDelete(DoublyList *doublyList, int data){
+	DoublyNode *indexNode = doublyList->head;
+	while (1){
+	if (indexNode == NULL) return; //already at end of list
+	if (*indexNode->data != data) continue;
+		// close the gap
+		if(indexNode->prev == NULL) doublyList->head = indexNode->next;
+		else{
+			indexNode->prev->next = indexNode->next;
+		}
+		if(indexNode->next == NULL) doublyList->tail = indexNode->prev;
+		else{
+			indexNode->next->prev = indexNode->prev;
+		}
+		
+		// delete *indexNode
+		free(indexNode);
+		indexNode = NULL; 
+		doublyList->size--;
+	}
 }
 
 
