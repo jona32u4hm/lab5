@@ -106,5 +106,70 @@ void doublyDelete(DoublyList *doublyList, int data){
 	}
 }
 
+DoublyNode doublySearch(DoublyList *doublyList, void data){
+	DoublyNode *indexNode = doublyList->head;
+	for (index = doublyList->size, index > 0, index--){
+		if (*indexNode->data == data) return indexNode;
+	}
+	return NULL;
+}
+
+void doublyPrint(DoublyList *doublyList){
+	DoublyNode *indexNode = doublyList->head;
+	while (1){
+		if (indexNode == NULL) return; //already at end of list
+		//print Node 
+		indexNode = indexNode->next;
+	}
+}
+
+void doublyPrintBack(DoublyList *doublyList){
+	if(doublyList->type_indicator == NULL) {
+		printf("unspecified data type");
+		return;
+	}
+	DoublyNode *indexNode = doublyList->tail;
+	while (1){
+		if (indexNode == NULL) return; //already at end of list
+		doublyPrintNode(indexNode, doublyList->type_indicator); 
+		indexNode = indexNode->prev;
+	}
+}
+
+void doublyPrintNode(DoublyNode *node, char type_indicator){
+    switch (type_indicator) {
+        case 'c': // char
+            printf("%c", *(char*)node->data);
+            break;
+        case 's': // short
+            printf("%hd", *(short*)node->data);
+            break;
+        case 'i': // int
+            printf("%d", *(int*)node->data);
+            break;
+        case 'l': // long
+            printf("%ld", *(long*)node->data);
+            break;
+        case 'f': // float
+            printf("%f", *(float*)node->data);
+            break;
+        case 'd': // double
+            printf("%lf", *(double*)node->data);
+            break;
+        case 'L': // long double
+            printf("%Lf", *(long double*)node->data);
+            break;
+        case 'p': // pointer (address)
+            printf("%p", *(void*)node->data); 
+            break;
+        case 'S': // string (char array)
+            // For strings, the void* is a char* to the start of string
+            printf("%s", (char*)node->data);
+            break;
+        default:
+            printf("Unknown or unsupported type indicator: %c", type_indicator);
+            break;
+    }
+}
 
 
