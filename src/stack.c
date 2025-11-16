@@ -21,4 +21,15 @@ int pop(struct Stack* s, int* value) { //elimina y delvuelve el elemento superio
     if (isEmpty(s)) { 
         return 0; //falla si el stack está vacío
     }
+    *value=s->data[s->top];
+    s->top--;
+    return 1; //funciona si el stack no está vacío
+}
+
+int top(struct Stack* s, int* value) {
+    if (isEmpty(s)) {
+        return 0 //falla si el stack está vacío
+    }
+    *value= s->data[s->top];
+    return 1; 
 }
