@@ -91,7 +91,6 @@ int main_stack(){
     }
 
     printf("A continuación, se va a vaciar el stack... \n");
-
     //Pop hasta vaciar stack para que esté vacío
     pop(&s, &val);
     pop(&s, &val);
