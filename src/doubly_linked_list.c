@@ -125,10 +125,13 @@ void doublyPrintBack(DoublyList *doublyList){
 
 void doublyDestroy(DoublyList *doublyList){
 	DoublyNode *indexNode = doublyList->head;
+	DoublyNode *nextNode = doublyList->head;
+	
 	while (1){
 		if (indexNode == NULL) return; //already at end of list
+		nextNode = indexNode->next;
 		free(indexNode);
-		indexNode = indexNode->next;
+		indexNode = nextNode;
 	}
 }
 
