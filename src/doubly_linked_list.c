@@ -1,25 +1,15 @@
-#include "doubly_linked_list.h"
+#include "../include/doubly_linked_list.h"
 #include <stdio.h>
 #include <stdlib.h>
 
 
    //    head -nxt-> node -> ... <-prv- tail 
 
-typedef struct {
-	void *data;
-	struct node *prev;
-	struct node *next;
-} DoublyNode;
-typedef struct {
-	DoublyNode *head;
-	DoublyNode *tail;
-	int size;
-	char type_indicator; //data type must be defined when creating the list and this must be repected afterwards
-} DoublyList
 
 
 
-void doublyInsertHead(DoublyList *doublyList, void *data){
+
+void doublyInsertHead(DoublyList *doublyList, int data){
 	DoublyNode *newNode = malloc(sizeof(DoublyNode));
 	if (newNode == NULL) return;
 	//hay que hacer: *newNode = {.data = data, .next = *doublyList->head, .prev = NULL};
@@ -33,13 +23,13 @@ void doublyInsertHead(DoublyList *doublyList, void *data){
         doublyList->tail = newNode;
     } else {
 		newNode->next = doublyList->head;
-		doublyList->head->prev = &newNode;
+		doublyList->head->prev = newNode;
 		doublyList->head = newNode;
 	}
 	doublyList->size++;
 }
 
-void doublyInsertTail(DoublyList *doublyList, void *data){
+void doublyInsertTail(DoublyList *doublyList, int data){
 	DoublyNode *newNode = malloc(sizeof(DoublyNode));
 	if (newNode == NULL) return;
 	//hay que hacer: *newNode = {.data = data, .prev = *doublyList->tail, .next = NULL};
@@ -53,13 +43,14 @@ void doublyInsertTail(DoublyList *doublyList, void *data){
         doublyList->tail = newNode;
     } else {
 		newNode->prev = doublyList->tail;
-		doublyList->tail->next = &newNode;
+		doublyList->tail->next = newNode;
 		doublyList->tail = newNode;
 	}
 	doublyList->size++;
 }
 
-void doublyInsert(DoublyList *doublyList, void *data, int index){
+void doublyInsert(DoublyList *doublyList, int data, int index){
+	DoublyNode *newNode = malloc(sizeof(DoublyNode));
 	DoublyNode *indexNode = doublyList->head;
 	if (index > doublyList->size) return; // index must be in list range
 	
@@ -70,7 +61,7 @@ void doublyInsert(DoublyList *doublyList, void *data, int index){
         doublyList->head = newNode;
         doublyList->tail = newNode;
     }else{
-		for (index > 0, index--){//recorrer la lista
+		for (;index > 0; index--){//recorrer la lista
 			indexNode = indexNode->next;
 		}
 		
@@ -88,7 +79,7 @@ void doublyDelete(DoublyList *doublyList, int data){
 	DoublyNode *indexNode = doublyList->head;
 	while (1){
 	if (indexNode == NULL) return; //already at end of list
-	if (*indexNode->data != data) continue;
+	if (indexNode->data != data) continue;
 		// close the gap
 		if(indexNode->prev == NULL) doublyList->head = indexNode->next;
 		else{
@@ -106,10 +97,10 @@ void doublyDelete(DoublyList *doublyList, int data){
 	}
 }
 
-DoublyNode doublySearch(DoublyList *doublyList, void data){
+DoublyNode *doublySearch(DoublyList *doublyList, int data){
 	DoublyNode *indexNode = doublyList->head;
-	for (index = doublyList->size, index > 0, index--){
-		if (*indexNode->data == data) return indexNode;
+	for (int index = doublyList->size; index > 0; index--){
+		if (indexNode->data == data) return indexNode;
 	}
 	return NULL;
 }
@@ -118,58 +109,18 @@ void doublyPrint(DoublyList *doublyList){
 	DoublyNode *indexNode = doublyList->head;
 	while (1){
 		if (indexNode == NULL) return; //already at end of list
-		//print Node 
+		printf("%d", indexNode->data);
 		indexNode = indexNode->next;
 	}
 }
 
 void doublyPrintBack(DoublyList *doublyList){
-	if(doublyList->type_indicator == NULL) {
-		printf("unspecified data type");
-		return;
-	}
 	DoublyNode *indexNode = doublyList->tail;
 	while (1){
 		if (indexNode == NULL) return; //already at end of list
-		doublyPrintNode(indexNode, doublyList->type_indicator); 
+		printf("%d", indexNode->data);
 		indexNode = indexNode->prev;
 	}
-}
-
-void doublyPrintNode(DoublyNode *node, char type_indicator){
-    switch (type_indicator) {
-        case 'c': // char
-            printf("%c", *(char*)node->data);
-            break;
-        case 's': // short
-            printf("%hd", *(short*)node->data);
-            break;
-        case 'i': // int
-            printf("%d", *(int*)node->data);
-            break;
-        case 'l': // long
-            printf("%ld", *(long*)node->data);
-            break;
-        case 'f': // float
-            printf("%f", *(float*)node->data);
-            break;
-        case 'd': // double
-            printf("%lf", *(double*)node->data);
-            break;
-        case 'L': // long double
-            printf("%Lf", *(long double*)node->data);
-            break;
-        case 'p': // pointer (address)
-            printf("%p", *(void*)node->data); 
-            break;
-        case 'S': // string (char array)
-            // For strings, the void* is a char* to the start of string
-            printf("%s", (char*)node->data);
-            break;
-        default:
-            printf("Unknown or unsupported type indicator: %c", type_indicator);
-            break;
-    }
 }
 
 

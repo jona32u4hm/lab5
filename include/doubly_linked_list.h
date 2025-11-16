@@ -6,23 +6,23 @@
    //    head -nxt-> node -> ... <-prv- tail 
    //
 
-typedef struct {
-	void *data;
-	struct node *prev;
-	struct node *next;
-} DoublyNode;
+struct DoublyNode{
+	int data;
+	struct DoublyNode *prev;
+	struct DoublyNode *next;
+};
+typedef struct DoublyNode DoublyNode;
 typedef struct {
 	DoublyNode *head;
 	DoublyNode *tail;
 	int size;
-	char type_indicator; //data type must be defined when creating the list and this must be repected afterwards
-} DoublyList
+} DoublyList;
 
-void doublyInsertHead(DoublyList *doublyList, void *data);
-void doublyInsertTail(DoublyList *doublyList, void *data);
-void doublyInsert(DoublyList *doublyList, void *data, int index);
+void doublyInsertHead(DoublyList *doublyList, int data);
+void doublyInsertTail(DoublyList *doublyList, int data);
+void doublyInsert(DoublyList *doublyList, int data, int index);
 void doublyDelete(DoublyList *doublyList, int data);
-DoublyNode doublySearch(DoublyList *doublyList, void data);
+DoublyNode *doublySearch(DoublyList *doublyList, int data);
 void doublyPrint(DoublyList *doublyList);
 void doublyPrintBack(DoublyList *doublyList);
 
