@@ -1,22 +1,17 @@
 #ifndef STACK_H
 #define STACK_H
-
-struct StackNode {
-    int data;
-    struct StackNode* next;
-}
-//esta parte es la estructura de un nodo del stack
+#define MAX_STACK 100
 
 struct Stack {
-    struct StackNode* top;
-}
+    int data[MAX_STACK];
+    int top;
+};
 //estructura del stack
 
 void initStack(struct Stack* stack); //crea stack vacío
-void push(struct Stack* stack, init value); //elemento a parte superior
-int pop(struct Stack* stack); //elimina y retorna elemento superior
-int pek(struct Stack* stack); //devuelve elemento superior sin eliminarlo
-int isEmpty(struct Stack stack);//verifica stack vacío
-void freeStack(struct Stack* stack); //libera nodos
+int isEmpty(struct Stack* stack);
+int push(struct Stack* stack, int value);
+int pop(struct Stack* stack, int* value);
+int top(struct Stack* stack, int* value);
 
 #endif
