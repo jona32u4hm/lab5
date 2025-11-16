@@ -50,10 +50,10 @@ void doublyInsertTail(DoublyList *doublyList, int data){
 }
 
 void doublyInsert(DoublyList *doublyList, int data, int index){
-	DoublyNode *newNode = malloc(sizeof(DoublyNode));
-	DoublyNode *indexNode = doublyList->head;
 	if (index > doublyList->size) return; // index must be in list range
-	
+	DoublyNode *newNode = malloc(sizeof(DoublyNode));
+	newNode->data = data;
+	DoublyNode *indexNode = doublyList->head;
 	if (doublyList->head == NULL) {
         // Si está vacía el nuevo nodo es la cabeza y la cola a la vez.
         newNode->prev = NULL;
@@ -65,11 +65,12 @@ void doublyInsert(DoublyList *doublyList, int data, int index){
 			indexNode = indexNode->next;
 		}
 		
-		DoublyNode *newNode = malloc(sizeof(DoublyNode));
 		if (newNode == NULL) return;
 		
 		newNode->prev = indexNode->prev;
 		newNode->next = indexNode;
+		indexNode->prev->next = newNode;
+		indexNode->prev = newNode;
 	
 	}
 	doublyList->size++;
@@ -78,22 +79,24 @@ void doublyInsert(DoublyList *doublyList, int data, int index){
 void doublyDelete(DoublyList *doublyList, int data){
 	DoublyNode *indexNode = doublyList->head;
 	while (1){
-	if (indexNode == NULL) return; //already at end of list
-	if (indexNode->data != data) continue;
-		// close the gap
-		if(indexNode->prev == NULL) doublyList->head = indexNode->next;
-		else{
-			indexNode->prev->next = indexNode->next;
+		if (indexNode == NULL) return; //already at end of list
+		if (indexNode->data == data) {
+			// close the gap
+			if(indexNode->prev == NULL) doublyList->head = indexNode->next;
+			else{
+				indexNode->prev->next = indexNode->next;
+			}
+			if(indexNode->next == NULL) doublyList->tail = indexNode->prev;
+			else{
+				indexNode->next->prev = indexNode->prev;
+			}
+			
+			// delete *indexNode
+			free(indexNode);
+			indexNode = NULL; 
+			doublyList->size--;
 		}
-		if(indexNode->next == NULL) doublyList->tail = indexNode->prev;
-		else{
-			indexNode->next->prev = indexNode->prev;
-		}
-		
-		// delete *indexNode
-		free(indexNode);
-		indexNode = NULL; 
-		doublyList->size--;
+		indexNode = indexNode->next;
 	}
 }
 
@@ -109,7 +112,7 @@ void doublyPrint(DoublyList *doublyList){
 	DoublyNode *indexNode = doublyList->head;
 	while (1){
 		if (indexNode == NULL) return; //already at end of list
-		printf("%d", indexNode->data);
+		printf(" %d ", indexNode->data);
 		indexNode = indexNode->next;
 	}
 }
@@ -118,7 +121,7 @@ void doublyPrintBack(DoublyList *doublyList){
 	DoublyNode *indexNode = doublyList->tail;
 	while (1){
 		if (indexNode == NULL) return; //already at front of list
-		printf("%d", indexNode->data);
+		printf(" %d ", indexNode->data);
 		indexNode = indexNode->prev;
 	}
 }
