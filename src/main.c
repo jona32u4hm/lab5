@@ -102,7 +102,6 @@ int main_stack(){
         printf("El stack no está vacío\n"); //debe imprimir que está vacío
     } 
 }
-
 int main(){
     main_doublylist();
     main_stack();
