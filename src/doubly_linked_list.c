@@ -117,10 +117,21 @@ void doublyPrint(DoublyList *doublyList){
 void doublyPrintBack(DoublyList *doublyList){
 	DoublyNode *indexNode = doublyList->tail;
 	while (1){
-		if (indexNode == NULL) return; //already at end of list
+		if (indexNode == NULL) return; //already at front of list
 		printf("%d", indexNode->data);
 		indexNode = indexNode->prev;
 	}
 }
+
+void doublyDestroy(DoublyList *doublyList){
+	DoublyNode *indexNode = doublyList->head;
+	while (1){
+		if (indexNode == NULL) return; //already at end of list
+		free(indexNode);
+		indexNode = indexNode->next;
+	}
+}
+
+
 
 

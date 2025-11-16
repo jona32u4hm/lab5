@@ -25,7 +25,7 @@ void doublyDelete(DoublyList *doublyList, int data);
 DoublyNode *doublySearch(DoublyList *doublyList, int data);
 void doublyPrint(DoublyList *doublyList);
 void doublyPrintBack(DoublyList *doublyList);
-
+void doublyDestroy(DoublyList *doublyList);
 
 
 
