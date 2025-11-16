@@ -9,12 +9,13 @@ int isEmpty(struct Stack* s) {
 }
 
 int push(struct Stack*s, int value) { //agrega un elemento al inicio del stack
-    if (s->top >== MAX_STACK -1) {
-        return 0; //verifica si el stack está lleno
+    if (s->top >=MAX_STACK -1) {
+        return 0; //stack lleno
     }
     s-> top++;
     s->data[s->top]=value;
-    return 1; //si no está lleno, devuelve 1
+    return 1; //éxito
+
 }
 
 int pop(struct Stack* s, int* value) { //elimina y delvuelve el elemento superior
@@ -28,7 +29,7 @@ int pop(struct Stack* s, int* value) { //elimina y delvuelve el elemento superio
 
 int top(struct Stack* s, int* value) {
     if (isEmpty(s)) {
-        return 0 //falla si el stack está vacío
+        return 0; //falla si el stack está vacío
     }
     *value= s->data[s->top];
     return 1; 
