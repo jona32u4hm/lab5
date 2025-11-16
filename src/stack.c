@@ -18,7 +18,7 @@ int push(struct Stack*s, int value) { //agrega un elemento al inicio del stack
 }
 
 int pop(struct Stack* s, int* value) { //elimina y delvuelve el elemento superior
-    if (IsEmoty(s)) { 
+    if (isEmpty(s)) { 
         return 0; //falla si el stack está vacío
     }
 }
