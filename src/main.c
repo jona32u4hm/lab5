@@ -1,34 +1,35 @@
 #include <stdio.h>
 #include "stack.h"
-#include "../include/doubly_linked_list.h"
+#include "doubly_linked_list.h"
+#include "dynamic_arrays.h"
 
 DoublyList myList;
 
 int main_doublylist(){
-    printf("testing doubly_linked_list.h\n");
-    printf("\ninsert head 5 (empty list)\n");
+    printf("Testing doubly_linked_list.h\n");
+    printf("\nInsert as head 5 (empty list)\n");
     doublyInsertHead(&myList, 5);
     doublyPrint(&myList); // expected: 5
     
-    printf("\ninsert head 10 15\n");
+    printf("\nInsert as head 10 then 15\n");
     doublyInsertHead(&myList, 10);
     doublyInsertHead(&myList, 15);
-    doublyPrint(&myList); // 
+    doublyPrint(&myList); // 15 10 5
     
-    printf("\ninsert tail 20 1\n");
+    printf("\nInsert as tail 20 then 1\n");
     doublyInsertTail(&myList, 20);
     doublyInsertTail(&myList, 1); 
     doublyPrint(&myList); // 15 10 5 20 1
     
-    printf("\ninsert at index 2, 99\n");
+    printf("\nInsert at index 2, 99\n");
     doublyInsert(&myList, 99, 2);
-    printf("\nprinted forward:\n");
     doublyPrint(&myList); // 15 10 99 5 20 1
-    printf("\nprinted backwards:\n");
+
+    printf("\nPrinted backwards:\n");
     doublyPrintBack(&myList); 
 	
 	
-    printf("\nsearch...\n");
+    printf("\n\nSearch 99\n");
     DoublyNode *found_node = doublySearch(&myList, 99);
     if (found_node != NULL) {
         printf("99: FOUND. Data: %d\n", found_node->data);
@@ -36,73 +37,138 @@ int main_doublylist(){
         printf("99: NOT FOUND.\n");
     }
 
+    printf("Search 500\n");
     found_node = doublySearch(&myList, 500);
-    if (found_node == NULL) {
+    if (found_node != NULL) {
+        printf("500: FOUND. Data: %d\n", found_node->data);
+    } else {
         printf("500: NOT FOUND.\n");
-    }
-	
-    printf("\ndelete... (99)\n");
+    }	
+
+    printf("\nDelete (99)\n");
     doublyDelete(&myList, 99);
     doublyPrint(&myList); // 15 10 5 20 1
 	
 	
-    printf("\ndeleting unexistant\n");
+    printf("\nDeleting unexistant value 1000\n");
     doublyDelete(&myList, 1000);
     doublyPrint(&myList); // 15 10 5 20 1
     
-    printf("\ncurrent list size check: %d\n", myList.size);
+    printf("\nCurrent list size check: %d\n", myList.size);
     
     
-    printf("\nemptying...(cleanup)\n");
-    doublyDestroy(&myList); //cleanup	 
-    printf("\nemptied\n");
+    printf("\nEmptying...(cleanup)\n");
+    doublyDestroy(&myList); // Cleanup	 
+    printf("\nEmptied\n");
     
-    printf("list size now: %d\n", myList.size);
+    printf("List size now: %d\n", myList.size);
+    printf("End of doublylist testing\n");
 	
     return 0;
 }
 
 int main_stack(){
+    printf("\nTesting stack.h\n");
+    printf("\nCreating an empty stack and pushing elements\n");
     struct Stack s;
-    initStack(&s); //incia el stack
+    initStack(&s); 
 
-    //aquí va a ir el push de elementos:
+    // Pushing elements:
     push(&s, 10);
     printf("Push: 10 \n");
     push(&s, 20);
     printf("Push: 20 \n");
     push(&s, 30);
     printf("Push: 30 \n");
-    int val;
-
-    //pop
+    int val;    //val will contain top value
+    top(&s, &val);
+    printf("Top: %d\n", val);
+	
+    
+    // Using pop
+    printf("\nTop value will be popped and the new top value will be printed");
     pop(&s, &val);
-    printf("Pop: %d\n", val);
-	//top
+    printf("\nPop: %d\n", val);
     top(&s, &val);
     printf("Top: %d\n", val);
 
-    //Verificar si está vacío
+    // Check if is empty
+    printf("\nChecking if the stack is empty...\n");
     if (isEmpty(&s)) {
-        printf("El stack está vacío\n");
+        printf("Stack is empty\n");
     }
     else {
-        printf("El stack no está vacío\n");
+        printf("Stack is not empty\n");
     }
 
-    printf("A continuación, se va a vaciar el stack... \n");
-    //Pop hasta vaciar stack para que esté vacío
+    printf("Emptying stack...\n");
+    // Pop until there is nothing left
     pop(&s, &val);
     pop(&s, &val);
     if (isEmpty(&s)) {
-        printf("El stack está vacío\n");
+        printf("Stack is empty\n");
     }
     else {
-        printf("El stack no está vacío\n"); //debe imprimir que está vacío
-    } 
+        printf("Stack is not empty\n"); // Expected to be empty
+    }
+    printf("End of stack testing\n");
+    return 0; 
 }
+
+int main_dynamic_arrays() {
+    printf("\nTesting stack.h\n");
+
+    printf("\nCreating array...\n");
+    int* array = create_array();
+    print_array(array);
+    
+    printf("\n\nAdding elements to the array...\n");
+    for (int i = 1; i <= 6; i++) {
+	array = add_element(array, i);
+    }
+    print_array(array);
+
+    printf("\n\nEliminating the element at index 4...\n");
+    array = eliminate_element(array, 4);
+    print_array(array);
+
+    printf("\n\nGetting the value at index 4...");
+    int val = get_element(array, 4);
+    printf("\n%d\n", val);
+    
+    //Normalizing array
+    printf("\nThe array will be printed manually\n");
+    printf("[");
+    for (int i = 0; i <= *array; i++) {
+	if (i != *array) {
+	    printf("%d,", *(array+i));
+	} else {
+	    printf("%d", *(array+i));
+	}
+    }
+    printf("]");
+    printf("\nFirst element contains the size of the array");
+    printf("\nNormalizing array...");
+    int size = get_element(array, -1);
+    array = normalize_array(array);
+    printf("\nThe array will be printed manually\n");
+    printf("[");
+    for (int i = 0; i <= size-1; i++) {
+	if (i != size-1) {
+	    printf("%d,", *(array+i));
+	} else {
+	    printf("%d", *(array+i));
+	}
+    }
+    printf("]");
+    free(array);
+    array = NULL
+    return 0;
+}
+
 int main(){
     main_doublylist();
     main_stack();
+    main_dynamic_arrays();
     return 0;
 }
