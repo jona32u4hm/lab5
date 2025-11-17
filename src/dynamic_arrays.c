@@ -70,7 +70,7 @@ int get_element(int* arr, int index) {
     return *(arr + index + 1);
 }
 
-//print_array prints the array elemnts except for the element counter
+//print_array prints the array elements except for the element counter
 int print_array(int* arr) {
     printf("[");
     for (int i=1;i <= *arr; i++) {
@@ -86,7 +86,6 @@ int print_array(int* arr) {
 
 //normalize_array receives as a parameter a pointer to the array
 //It will return a version of the array without the element counter to be used with other c functions
-//This operation can be reversed by creating and array with the element counter as its first element 
 
 int* normalize_array(int* arr) {
     int* backup = arr;

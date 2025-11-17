@@ -1,36 +1,36 @@
 #include "stack.h"
 
 void initStack(struct Stack* s) {
-    s->top=-1; //indica stack vacío
+    s->top=-1; //Says stack empty
 }
 
 int isEmpty(struct Stack* s) {
-    return (s->top==-1); //verifica si el stack está vacío
+    return (s->top==-1); // Verifies if the stack is empty
 }
 
-int push(struct Stack*s, int value) { //agrega un elemento al inicio del stack
+int push(struct Stack*s, int value) { // Adds an elemnt at the begining of the stack
     if (s->top >=MAX_STACK -1) {
-        return 0; //stack lleno
+        return 1; // Stack full
     }
     s-> top++;
     s->data[s->top]=value;
-    return 1; //éxito
+    return 0; // Succes
 
 }
 
-int pop(struct Stack* s, int* value) { //elimina y delvuelve el elemento superior
+int pop(struct Stack* s, int* value) { // Eliminates and returns top element
     if (isEmpty(s)) { 
-        return 0; //falla si el stack está vacío
+        return 1; 
     }
     *value=s->data[s->top];
     s->top--;
-    return 1; //funciona si el stack no está vacío
+    return 0; 
 }
 
 int top(struct Stack* s, int* value) {
     if (isEmpty(s)) {
-        return 0; //falla si el stack está vacío
+        return 1; 
     }
     *value= s->data[s->top];
-    return 1; 
+    return 0; 
 }

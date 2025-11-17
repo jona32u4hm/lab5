@@ -33,13 +33,13 @@ void doublyInsertHead(DoublyList *doublyList, int data){
 void doublyInsertTail(DoublyList *doublyList, int data){
 	DoublyNode *newNode = malloc(sizeof(DoublyNode));
 	if (newNode == NULL) return;
-	//hay que hacer: *newNode = {.data = data, .prev = *doublyList->tail, .next = NULL};
+	// Must do: *newNode = {.data = data, .prev = *doublyList->tail, .next = NULL};
 	
 	newNode->data = data;
 	newNode->next = NULL;
 	if (doublyList->head == NULL) {
         doublyList->size = 0;
-        // Si está vacía el nuevo nodo es la cabeza y la cola a la vez.
+        // If empty new node will be head and tail simultaneously
         newNode->prev = NULL;
         doublyList->head = newNode;
         doublyList->tail = newNode;
@@ -58,13 +58,13 @@ void doublyInsert(DoublyList *doublyList, int data, int index){
 	DoublyNode *indexNode = doublyList->head;
 	if (doublyList->head == NULL) {
         doublyList->size = 0;
-        // Si está vacía el nuevo nodo es la cabeza y la cola a la vez.
+        // If empty new node will be head and tail simultaneously
         newNode->prev = NULL;
         newNode->next = NULL;
         doublyList->head = newNode;
         doublyList->tail = newNode;
     }else{
-		for (;index > 0; index--){//recorrer la lista
+		for (;index > 0; index--){    //recorrer la lista
 			indexNode = indexNode->next;
 		}
 		

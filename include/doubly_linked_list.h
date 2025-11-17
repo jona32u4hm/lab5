@@ -2,7 +2,7 @@
 #define DOUBLY_LINKED_LIST_H
 
    // doubly_linked_list.h 
-   // doubly linked list structure:
+   // Doubly linked list structure:
    //    head -nxt-> node -> ... <-prv- tail 
    //
 
@@ -18,6 +18,7 @@ typedef struct {
 	int size;
 } DoublyList;
 
+// Functions
 void doublyInsertHead(DoublyList *doublyList, int data);
 void doublyInsertTail(DoublyList *doublyList, int data);
 void doublyInsert(DoublyList *doublyList, int data, int index);

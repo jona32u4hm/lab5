@@ -2,11 +2,13 @@
 #define STACK_H
 #define MAX_STACK 100
 
+// Stack structure
 struct Stack {
     int data[MAX_STACK];
     int top;
 };
-//estructura del stack
+
+// Functions
 
 void initStack(struct Stack* stack); //crea stack vacío
 int isEmpty(struct Stack* stack);
