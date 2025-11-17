@@ -88,12 +88,12 @@ int print_array(int* arr) {
 //It will return a version of the array without the element counter to be used with other c functions
 //This operation could be reversed by creating and array with the element counter as its first element 
 
-normalize_array(int* arr) {
+int* normalize_array(int* arr) {
     if (arr == NULL) {
 	printf("Array is NULL\n");
 	return NULL;
     }
-    limit = *arr
+    int limit = *arr;
     for (int i=0;i < limit; i++) { 
         *(arr + i) = *(arr + i+1);
     };

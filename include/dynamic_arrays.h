@@ -6,6 +6,7 @@ int* add_element(int* arr, int val);
 int* eliminate_element(int* arr, int index);
 int get_element(int* arr, int index);
 int print_array(int* arr);
+int* normalize_array(int* arr);
 
 #endif
 
