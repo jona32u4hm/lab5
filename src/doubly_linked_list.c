@@ -2,7 +2,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-
+   // The structure will be printed the following way	
    //    head -nxt-> node -> ... <-prv- tail 
 
 
@@ -12,13 +12,13 @@
 void doublyInsertHead(DoublyList *doublyList, int data){
 	DoublyNode *newNode = malloc(sizeof(DoublyNode));
 	if (newNode == NULL) return;
-	//hay que hacer: *newNode = {.data = data, .next = *doublyList->head, .prev = NULL};
+	// Must do: *newNode = {.data = data, .next = *doublyList->head, .prev = NULL};
 	
 	newNode->data = data;
 	newNode->prev = NULL;
 	if (doublyList->head == NULL) {
         doublyList->size = 0;
-        // Si está vacía el nuevo nodo es la cabeza y la cola a la vez.
+        // If empty, new node will be head and tail at the same time.
         newNode->next = NULL;
         doublyList->head = newNode;
         doublyList->tail = newNode;
