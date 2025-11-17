@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include "stack.h"
 #include "doubly_linked_list.h"
 #include "dynamic_arrays.h"
@@ -160,9 +161,9 @@ int main_dynamic_arrays() {
 	    printf("%d", *(array+i));
 	}
     }
-    printf("]");
+    printf("]\n\n");
     free(array);
-    array = NULL
+    array = NULL;
     return 0;
 }
 
