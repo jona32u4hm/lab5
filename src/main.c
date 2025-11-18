@@ -73,6 +73,15 @@ int main_stack(){
     printf("\nCreating an empty stack and pushing elements\n");
     struct Stack s;
     initStack(&s); 
+    push(&s, 1);
+    int val;    //val will contain values
+    printf("Push: 1 \n");
+    pop(&s, &val);
+    printf("\nPop: %d\n", val);  
+    printf("\nPopping rom an empty stack\n");  
+    pop(&s, &val);
+    printf("\nPop: %d\n", val);
+	
 
     // Pushing elements:
     push(&s, 10);
@@ -81,7 +90,6 @@ int main_stack(){
     printf("Push: 20 \n");
     push(&s, 30);
     printf("Push: 30 \n");
-    int val;    //val will contain top value
     top(&s, &val);
     printf("Top: %d\n", val);
 	
@@ -117,7 +125,7 @@ int main_stack(){
 }
 
 int main_dynamic_arrays() {
-    printf("\nTesting stack.h\n");
+    printf("\nTesting dynamic_arrays.h\n");
 
     printf("\nCreating array...\n");
     int* array = create_array();
@@ -125,27 +133,35 @@ int main_dynamic_arrays() {
     
     printf("\n\nAdding elements to the array...\n");
     for (int i = 1; i <= 6; i++) {
-	array = add_element(array, i);
+		array = add_element(array, i);
     }
     print_array(array);
 
     printf("\n\nEliminating the element at index 4...\n");
     array = eliminate_element(array, 4);
     print_array(array);
+    
+    printf("\n\nEliminating the element at index 10 (out of list)...\n");
+    array = eliminate_element(array, 10);
+    print_array(array);
 
     printf("\n\nGetting the value at index 4...");
     int val = get_element(array, 4);
+    printf("\n%d\n", val);
+    
+    printf("\n\nGetting the value at index 6 (now out of the list too) ...");
+    val = get_element(array, 6);
     printf("\n%d\n", val);
     
     //Normalizing array
     printf("\nThe array will be printed manually\n");
     printf("[");
     for (int i = 0; i <= *array; i++) {
-	if (i != *array) {
-	    printf("%d,", *(array+i));
-	} else {
-	    printf("%d", *(array+i));
-	}
+		if (i != *array) {
+			printf("%d,", *(array+i));
+		} else {
+			printf("%d", *(array+i));
+		}
     }
     printf("]");
     printf("\nFirst element contains the size of the array");
@@ -155,11 +171,11 @@ int main_dynamic_arrays() {
     printf("\nThe array will be printed manually\n");
     printf("[");
     for (int i = 0; i <= size-1; i++) {
-	if (i != size-1) {
-	    printf("%d,", *(array+i));
-	} else {
-	    printf("%d", *(array+i));
-	}
+		if (i != size-1) {
+			printf("%d,", *(array+i));
+		} else {
+			printf("%d", *(array+i));
+		}
     }
     printf("]\n\n");
     free(array);
