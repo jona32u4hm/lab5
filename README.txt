@@ -34,7 +34,7 @@ Note: It is advised to save the element counter in a variable before normalizing
 ## Compilation and Execution
 
 To compile just run make, it will generate a test executable so just run
-./test in orded to execute the domonstration
+./test in order to execute the domonstration
 It will contain a demonstration of every feature. It is advised to revise the main.c to undesrtand how the demonstration is implemented
 Also, be sure to read the source code to fully understand how everything is implemented as well as error management
 
