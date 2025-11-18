@@ -1,6 +1,7 @@
 # Laboratory #5
 
-This repository contains implementations of dynamic arrays, doubly linked lists, and stacks. Each data structure comes with functions to manipulate and access its elements.
+This repository contains implementations of dynamic arrays, doubly linked lists, and stacks. Each data structure comes 
+with functions to manipulate and access its elements.
 
 ## Features
 
